@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe De Flora | Culinary & Botanical Experience</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        flora: {
+                            bg: '#FAF6F0',
+                            card: '#F4EBE1',
+                            burgundy: '#6B1D2F',
+                            burgundyDark: '#4A121F',
+                            gold: '#D4AF37',
+                            goldDark: '#AA8828',
+                            green: '#2C4A3E',
+                            dark: '#221C1B',
+                            textMuted: '#6E655F'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #FAF6F0;
+            color: #221C1B;
+            font-family: 'Montserrat', sans-serif;
+            background-image: radial-gradient(#D4AF37 0.4px, transparent 0.4px), radial-gradient(#6B1D2F 0.4px, #FAF6F0 0.4px);
+            background-size: 32px 32px;
+            background-position: 0 0, 16px 16px;
+            background-opacity: 0.05;
+        }
+
+        .gold-border-frame {
+            border: 2px solid #D4AF37;
+            position: relative;
+        }
+        .gold-border-frame::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            right: 3px;
+            bottom: 3px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            pointer-events: none;
+        }
+
+        .menu-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        .menu-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(107, 29, 47, 0.12);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #F4EBE1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #6B1D2F;
+            border-radius: 4px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-flora-burgundy selection:text-flora-gold">
+
+    <header class="sticky top-0 z-40 bg-flora-bg/95 backdrop-blur-md border-b border-flora-gold/30 shadow-sm transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="scrollToSection('hero')">
+                <div class="w-10 h-10 rounded-full border-2 border-flora-gold bg-flora-burgundy flex items-center justify-center shadow-md">
+                    <i class="fa-solid font-serif text-flora-gold text-xl italic">F</i>
+                </div>
+                <div>
+                    <span class="font-serif text-2xl font-bold tracking-wider text-flora-burgundy block leading-tight">CAFE DE FLORA</span>
+                    <span class="text-[10px] tracking-widest text-flora-goldDark uppercase block">Botanical Bistro & Pizzeria</span>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-xs uppercase tracking-widest font-semibold text-flora-dark">
+                <a href="#menu" class="hover:text-flora-burgundy transition-colors">Menu</a>
+                <a href="#gallery" class="hover:text-flora-burgundy transition-colors">Customer Dish Highlights</a>
+                <a href="#about" class="hover:text-flora-burgundy transition-colors">About & Location</a>
+            </nav>
+
+            <button onclick="openBookingModal()" class="bg-flora-burgundy hover:bg-flora-burgundyDark text-flora-gold border border-flora-gold px-5 py-2.5 rounded-full text-xs uppercase tracking-widest font-semibold shadow-md transition-all transform hover:scale-105 flex items-center space-x-2">
+                <i class="fa-regular fa-calendar-check"></i>
+                <span>Reserve Table</span>
+            </button>
+        </div>
+    </header>
+
+    <section id="hero" class="relative py-12 md:py-20 px-4 max-w-7xl mx-auto w-full">
+        <div class="bg-flora-card rounded-2xl p-8 md:p-14 gold-border-frame shadow-xl overflow-hidden relative">
+            <!-- Decorative Corner Botanical SVGs -->
+            <div class="absolute top-0 left-0 w-24 h-24 opacity-20 pointer-events-none text-flora-burgundy">
+                <svg viewBox="0 0 100 100" fill="currentColor"><path d="M10,0 C40,20 20,60 0,100 C20,80 60,80 100,100 C80,60 80,20 100,0 C60,20 20,20 10,0 Z"/></svg>
+            </div>
+            
+            <div class="relative z-10 text-center max-w-3xl mx-auto">
+                <div class="inline-flex items-center space-x-2 bg-flora-bg border border-flora-gold/40 px-4 py-1.5 rounded-full text-xs text-flora-burgundy tracking-widest uppercase mb-4 shadow-sm">
+                    <i class="fa-solid fa-leaf text-flora-gold"></i>
+                    <span>Artisanal Italian & Gourmet Small Plates</span>
+                </div>
+                <h1 class="font-serif text-4xl sm:text-6xl font-bold text-flora-burgundy mb-4 tracking-wide leading-tight">
+                    Where Passion Meets Palate
+                </h1>
+                <p class="text-flora-textMuted text-sm sm:text-base leading-relaxed mb-8 max-w-2xl mx-auto">
+                    Welcome to Cafe De Flora. Savor authentic Neapolitan pizzas, exquisite small bites, handcrafted drinks, and seasonal culinary creations in a charming floral sanctuary.
+                </p>
+                
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#menu" class="bg-flora-burgundy text-flora-gold px-8 py-3.5 rounded-full text-xs font-semibold uppercase tracking-widest shadow-lg hover:bg-flora-burgundyDark transition-all">
+                        Explore Full Menu
+                    </a>
+                    <button onclick="openUploadModal()" class="bg-flora-bg text-flora-burgundy border border-flora-burgundy px-6 py-3.5 rounded-full text-xs font-semibold uppercase tracking-widest shadow hover:bg-flora-card transition-all">
+                        <i class="fa-solid fa-camera mr-2"></i> Share Your Dish Photo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="py-12 px-4 max-w-7xl mx-auto w-full">
+        <div class="text-center mb-10">
+            <h2 class="font-serif text-3xl sm:text-5xl font-bold text-flora-burgundy tracking-wide mb-2">Our Culinary Selection</h2>
+            <div class="w-16 h-0.5 bg-flora-gold mx-auto mb-4"></div>
+            <p class="text-flora-textMuted text-xs sm:text-sm max-w-md mx-auto">Handcrafted fresh daily with premium Italian imported & local organic ingredients.</p>
+        </div>
+
+        <!-- Filter & Search Control Panel -->
+        <div class="bg-flora-card p-4 rounded-xl gold-border-frame mb-8 flex flex-col md:flex-row gap-4 items-center justify-between">
+            <!-- Category Tabs -->
+            <div class="flex items-center space-x-2 overflow-x-auto w-full md:w-auto custom-scrollbar pb-2 md:pb-0" id="categoryTabs">
+                <!-- Javascript will populate categories dynamically -->
+            </div>
+
+            <!-- Search and Dietary Filters -->
+            <div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
+                <div class="relative flex-1 md:w-60">
+                    <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-flora-textMuted text-xs"></i>
+                    <input type="text" id="searchInput" oninput="filterMenuItems()" placeholder="Search dishes..." class="w-full pl-9 pr-3 py-2 text-xs bg-flora-bg border border-flora-gold/40 rounded-lg focus:outline-none focus:border-flora-burgundy text-flora-dark">
+                </div>
+                
+                <select id="dietaryFilter" onchange="filterMenuItems()" class="px-3 py-2 text-xs bg-flora-bg border border-flora-gold/40 rounded-lg focus:outline-none focus:border-flora-burgundy text-flora-dark">
+                    <option value="all">All Dietary</option>
+                    <option value="veg">Vegetarian</option>
+                    <option value="chef">Chef's Special</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Menu Grid -->
+        <div id="menuGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Javascript dynamic menu items rendering -->
+        </div>
+    </section>
+
+    <section id="gallery" class="py-12 px-4 max-w-7xl mx-auto w-full border-t border-flora-gold/20">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+            <div>
+                <span class="text-xs uppercase tracking-widest text-flora-goldDark font-semibold block mb-1">Guest Experience</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-flora-burgundy">Customer Dishes & Moments</h2>
+                <p class="text-flora-textMuted text-xs sm:text-sm mt-1">Photos shared directly by our valued guests at Cafe De Flora.</p>
+            </div>
+            <button onclick="openUploadModal()" class="bg-flora-gold hover:bg-flora-goldDark text-flora-dark font-semibold px-5 py-2.5 rounded-full text-xs uppercase tracking-widest shadow transition-all flex items-center space-x-2">
+                <i class="fa-solid fa-plus-circle"></i>
+                <span>Submit Your Dish Photo</span>
+            </button>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Dynamic Customer Photos inserted via JS -->
+        </div>
+    </section>
+
+    <section id="about" class="py-12 px-4 max-w-7xl mx-auto w-full">
+        <div class="bg-flora-card rounded-2xl p-8 lg:p-12 gold-border-frame grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+            <div class="lg:col-span-2">
+                <span class="text-xs uppercase tracking-widest text-flora-goldDark font-semibold block mb-2">Visit Us</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-flora-burgundy mb-4">Cafe De Flora Experience</h2>
+                <p class="text-flora-textMuted text-sm leading-relaxed mb-6">
+                    A botanical escape designed to indulge all senses. From wood-fired Neapolitan pizzas crafted with authentic Italian flour to exquisite hand-crafted appetizers and specialty coffees.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm text-flora-dark mb-6">
+                    <div class="flex items-start space-x-3 bg-flora-bg p-3.5 rounded-xl border border-flora-gold/30">
+                        <i class="fa-solid fa-clock text-flora-burgundy text-lg mt-0.5"></i>
+                        <div>
+                            <strong class="block text-flora-burgundy">Opening Hours</strong>
+                            <span>Mon - Sun: 11:00 AM – 11:00 PM</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3 bg-flora-bg p-3.5 rounded-xl border border-flora-gold/30">
+                        <i class="fa-solid fa-location-dot text-flora-burgundy text-lg mt-0.5"></i>
+                        <div>
+                            <strong class="block text-flora-burgundy">Location & Address</strong>
+                            <span>Cafe De Flora, Botanical District</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-flora-burgundy text-flora-bg p-6 rounded-xl text-center space-y-4 border border-flora-gold">
+                <i class="fa-solid fa-utensils text-3xl text-flora-gold"></i>
+                <h3 class="font-serif text-2xl font-bold">Planning a Gathering?</h3>
+                <p class="text-xs text-flora-bg/80">Reserve a table in our outdoor garden gazebo or private indoor floral dining room.</p>
+                <button onclick="openBookingModal()" class="w-full bg-flora-gold hover:bg-flora-goldDark text-flora-dark font-bold py-3 rounded-full text-xs uppercase tracking-widest transition-all">
+                    Book Table Now
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="mt-auto border-t border-flora-gold/30 bg-flora-card py-8 text-center text-xs text-flora-textMuted">
+        <div class="max-w-7xl mx-auto px-4 space-y-3">
+            <p class="font-serif text-lg font-bold text-flora-burgundy">CAFE DE FLORA</p>
+            <p>&copy; 2026 Cafe De Flora. All Rights Reserved. Crafted with Italian Passion.</p>
+        </div>
+    </footer>
+
+    <div id="bookingModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-flora-bg w-full max-w-md rounded-2xl gold-border-frame p-6 sm:p-8 relative animate-fade-in shadow-2xl">
+            <button onclick="closeBookingModal()" class="absolute top-4 right-4 text-flora-textMuted hover:text-flora-burgundy text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="text-center mb-6">
+                <h3 class="font-serif text-2xl font-bold text-flora-burgundy">Reserve a Table</h3>
+                <p class="text-xs text-flora-textMuted">Join us at Cafe De Flora for a dining experience.</p>
+            </div>
+            <form onsubmit="handleBookingSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-flora-burgundy mb-1">Full Name</label>
+                    <input type="text" required placeholder="John Doe" class="w-full px-3 py-2 text-xs bg-flora-card border border-flora-gold/40 rounded-lg focus:outline-none focus:border-flora-burgundy">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-flora-burgundy mb-1">Guests</label>
+                        <select class="w-full px-3 py-2 text-xs bg-flora-card border border-flora-gold/40 rounded-lg focus:outline-none focus:border-flora-burgundy">
+                            <option>2 People</option>
+                            <option>3 People</option>
+                            <option>4 People</option>
+                            <option>5+ People</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-flora-burgundy mb-1">Time</label>
+                        <input type="time" value="19:00" required class="w-full px-3 py-2 text-xs bg-flora-card border border-flora-gold/40 rounded-lg focus:outline-none focus:border-flora-burgundy">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-flora-burgundy mb-1">Special Request</label>
+                    <textarea rows="2" placeholder="Birthday, anniversary, garden seating..." class="w-full px-3 py-2 text-xs bg-flora-card border border-flora-gold/40 rounded-lg focus:outline-none focus:border-flora-burgundy"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-flora-burgundy text-flora-gold py-3 rounded-full text-xs font-semibold uppercase tracking-widest hover:bg-flora-burgundyDark transition-all shadow">
+                    Confirm Reservation
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="uploadModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-flora-bg w-full max-w-md rounded-2xl gold-border-frame p-6 sm:p-8 relative animate-fade-in shadow-2xl">
+            <button onclick="closeUploadModal()" class="absolute top-4 right-4 text-flora-textMuted hover:text-flora-burgundy text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="text-center mb-6">
+                <h3 class="font-serif text-2xl font-bold text-flora-burgundy">Share Your Dish Photo</h3>
+                <p class="text-xs text-flora-textMuted">Upload your photograph to be featured in our guest gallery!</p>
+            </div>
+            <form onsubmit="handlePhotoUpload(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-flora-burgundy mb-1">Dish Name</label>
+                    <input type="text" id="uploadDishName" required placeholder="e.g. Chicken Fiesta Pizza" class="w-full px-3 py-2 text-xs bg-flora-card border border-flora-gold/40 rounded-lg focus:outline-none focus:border-flora-burgundy">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-flora-burgundy mb-1">Image URL or Preset</label>
+                    <input type="url" id="uploadImageUrl" required placeholder="https://..." class="w-full px-3 py-2 text-xs bg-flora-card border border-flora-gold/40 rounded-lg focus:outline-none focus:border-flora-burgundy">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-flora-burgundy mb-1">Your Name / Handle</label>
+                    <input type="text" id="uploadCustomerName" required placeholder="@foodie_explorer" class="w-full px-3 py-2 text-xs bg-flora-card border border-flora-gold/40 rounded-lg focus:outline-none focus:border-flora-burgundy">
+                </div>
+                <button type="submit" class="w-full bg-flora-burgundy text-flora-gold py-3 rounded-full text-xs font-semibold uppercase tracking-widest hover:bg-flora-burgundyDark transition-all shadow">
+                    Submit Photo
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 bg-flora-burgundy text-flora-gold border border-flora-gold px-5 py-3 rounded-xl shadow-2xl z-50 text-xs font-medium hidden transition-all duration-300">
+        <span id="toastMsg">Action completed successfully!</span>
+    </div>
+
+    <script>
+        // Menu Items Data based on Cafe De Flora menu sheets & offerings
+        const menuData = [
+            {
+                id: 1,
+                title: "Chicken Fiesta",
+                category: "pizza",
+                price: "$18.50",
+                description: "Authentic Neapolitan crust, spiced grilled chicken, bell peppers, mozzarella & chili oil drizzle.",
+                image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
+                isVeg: false,
+                isChef: true
+            },
+            {
+                id: 2,
+                title: "Classic Margherita",
+                category: "pizza",
+                price: "$15.00",
+                description: "San Marzano tomatoes, fresh buffalo mozzarella, aromatic basil & extra virgin olive oil.",
+                image: "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=600&q=80",
+                isVeg: true,
+                isChef: false
+            },
+            {
+                id: 3,
+                title: "Truffle & Mushroom Neapolitan",
+                category: "pizza",
+                price: "$20.00",
+                description: "Wild sauteed mushrooms, white truffle cream base, fresh thyme & aged parmesan.",
+                image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80",
+                isVeg: true,
+                isChef: true
+            },
+            {
+                id: 4,
+                title: "Hot Drum Chicken Tenders",
+                category: "small-plates",
+                price: "$12.00",
+                description: "Crispy buttermilk drum tenders served with artisan garlic dip and fresh seasonal slaw.",
+                image: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=600&q=80",
+                isVeg: false,
+                isChef: false
+            },
+            {
+                id: 5,
+                title: "Avocado Crostini & Bruschetta",
+                category: "small-plates",
+                price: "$11.50",
+                description: "Toasted sourdough topped with smashed creamy avocado, heirloom cherry tomatoes & balsamic glaze.",
+                image: "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&fit=crop&w=600&q=80",
+                isVeg: true,
+                isChef: true
+            },
+            {
+                id: 6,
+                title: "Gourmet Slider Trio",
+                category: "small-plates",
+                price: "$14.00",
+                description: "Mini brioche burgers with caramelized onions, sharp cheddar, and house relish alongside seasoned fries.",
+                image: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80",
+                isVeg: false,
+                isChef: false
+            },
+            {
+                id: 7,
+                title: "Flora Botanical Mocktail",
+                category: "beverages",
+                price: "$7.50",
+                description: "Infused rose water, elderflower, fresh lime juice & sparkling soda with edible petals.",
+                image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80",
+                isVeg: true,
+                isChef: true
+            },
+            {
+                id: 8,
+                title: "Artisan Tiramisu",
+                category: "desserts",
+                price: "$9.00",
+                description: "Classic Italian espresso-soaked ladyfingers with rich mascarpone layers & cocoa dusting.",
+                image: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=600&q=80",
+                isVeg: true,
+                isChef: false
+            }
+        ];
+
+        // Customer Gallery Highlights
+        let customerGallery = [
+            {
+                id: 101,
+                title: "Pizza Neapolitan Special",
+                customer: "@sophia_eats",
+                likes: 42,
+                image: "https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 102,
+                title: "Crispy Small Plates Basket",
+                customer: "@marco_foodjournal",
+                likes: 29,
+                image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 103,
+                title: "Botanical Garden Brunch",
+                customer: "@clara_dining",
+                likes: 56,
+                image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 104,
+                title: "Handcrafted Coffee & Dessert",
+                customer: "@alex_cafe_vibes",
+                likes: 38,
+                image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80"
+            }
+        ];
+
+        let activeCategory = 'all';
+
+        window.onload = function() {
+            renderCategoryTabs();
+            renderMenuItems();
+            renderGallery();
+        };
+
+        function renderCategoryTabs() {
+            const categories = [
+                { id: 'all', label: 'All Items' },
+                { id: 'pizza', label: 'Pizza Neapolitan' },
+                { id: 'small-plates', label: 'Small Plates' },
+                { id: 'beverages', label: 'Beverages' },
+                { id: 'desserts', label: 'Desserts' }
+            ];
+
+            const tabsContainer = document.getElementById('categoryTabs');
+            tabsContainer.innerHTML = categories.map(cat => `
+                <button onclick="setCategory('${cat.id}')" class="px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+                    activeCategory === cat.id 
+                    ? 'bg-flora-burgundy text-flora-gold shadow' 
+                    : 'bg-flora-bg text-flora-textMuted hover:text-flora-burgundy border border-flora-gold/20'
+                }">
+                    ${cat.label}
+                </button>
+            `).join('');
+        }
+
+        function setCategory(catId) {
+            activeCategory = catId;
+            renderCategoryTabs();
+            renderMenuItems();
+        }
+
+        function renderMenuItems() {
+            const grid = document.getElementById('menuGrid');
+            const searchVal = document.getElementById('searchInput').value.toLowerCase();
+            const dietaryVal = document.getElementById('dietaryFilter').value;
+
+            const filtered = menuData.filter(item => {
+                const matchesCategory = activeCategory === 'all' || item.category === activeCategory;
+                const matchesSearch = item.title.toLowerCase().includes(searchVal) || item.description.toLowerCase().includes(searchVal);
+                let matchesDietary = true;
+
+                if (dietaryVal === 'veg') matchesDietary = item.isVeg;
+                if (dietaryVal === 'chef') matchesDietary = item.isChef;
+
+                return matchesCategory && matchesSearch && matchesDietary;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-12 text-flora-textMuted">
+                        <i class="fa-solid fa-utensils text-3xl mb-2 block text-flora-gold"></i>
+                        <p>No culinary items match your filter criteria.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(item => `
+                <div class="bg-flora-card rounded-2xl overflow-hidden gold-border-frame menu-card flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onerror="this.src='https://placehold.co/600x400/6B1D2F/D4AF37?text=Cafe+De+Flora'">
+                            <div class="absolute top-3 right-3 bg-flora-burgundy text-flora-gold font-bold px-3 py-1 rounded-full text-xs shadow-md border border-flora-gold/40">
+                                ${item.price}
+                            </div>
+                            ${item.isVeg ? '<span class="absolute top-3 left-3 bg-green-800 text-white text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded shadow">Veg</span>' : ''}
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center justify-between mb-1">
+                                <h3 class="font-serif text-xl font-bold text-flora-burgundy">${item.title}</h3>
+                                ${item.isChef ? '<span class="text-xs text-flora-goldDark font-semibold" title="Chef Recommendation"><i class="fa-solid fa-star"></i> Chef\'s Special</span>' : ''}
+                            </div>
+                            <p class="text-flora-textMuted text-xs leading-relaxed mt-2">${item.description}</p>
+                        </div>
+                    </div>
+                    <div class="px-5 pb-5 pt-2">
+                        <button onclick="showToast('Added ${item.title.replace(/'/g, "\\'")} to your interest list!')" class="w-full bg-flora-bg hover:bg-flora-burgundy hover:text-flora-gold border border-flora-burgundy text-flora-burgundy py-2 rounded-lg text-xs uppercase tracking-wider font-semibold transition-all flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-plus text-[10px]"></i>
+                            <span>Inquire Dish</span>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterMenuItems() {
+            renderMenuItems();
+        }
+
+        function renderGallery() {
+            const galleryGrid = document.getElementById('galleryGrid');
+            galleryGrid.innerHTML = customerGallery.map(item => `
+                <div class="bg-flora-card rounded-xl overflow-hidden gold-border-frame shadow-md group relative">
+                    <div class="h-56 overflow-hidden relative">
+                        <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/600x400/6B1D2F/D4AF37?text=Guest+Photo'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80"></div>
+                        <div class="absolute bottom-3 left-3 right-3 text-white">
+                            <h4 class="font-serif text-base font-bold leading-tight">${item.title}</h4>
+                            <span class="text-[11px] text-flora-gold block mt-0.5">Shared by ${item.customer}</span>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-flora-bg flex items-center justify-between border-t border-flora-gold/20">
+                        <span class="text-xs text-flora-textMuted"><i class="fa-solid fa-heart text-flora-burgundy mr-1"></i> ${item.likes} Likes</span>
+                        <button onclick="likePhoto(${item.id})" class="text-xs bg-flora-card hover:bg-flora-burgundy hover:text-flora-gold border border-flora-gold/40 text-flora-burgundy px-3 py-1 rounded-full transition-all">
+                            <i class="fa-regular fa-thumbs-up"></i> Like
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function likePhoto(id) {
+            const photo = customerGallery.find(p => p.id === id);
+            if(photo) {
+                photo.likes += 1;
+                renderGallery();
+                showToast(`Liked photo by ${photo.customer}!`);
+            }
+        }
+
+        // Modal Controls & Handlers
+        function openBookingModal() {
+            document.getElementById('bookingModal').classList.remove('hidden');
+        }
+
+        function closeBookingModal() {
+            document.getElementById('bookingModal').classList.add('hidden');
+        }
+
+        function handleBookingSubmit(e) {
+            e.preventDefault();
+            closeBookingModal();
+            showToast('Table reservation request submitted successfully! We will confirm shortly.');
+        }
+
+        function openUploadModal() {
+            document.getElementById('uploadModal').classList.remove('hidden');
+        }
+
+        function closeUploadModal() {
+            document.getElementById('uploadModal').classList.add('hidden');
+        }
+
+        function handlePhotoUpload(e) {
+            e.preventDefault();
+            const title = document.getElementById('uploadDishName').value;
+            const url = document.getElementById('uploadImageUrl').value;
+            const customer = document.getElementById('uploadCustomerName').value;
+
+            customerGallery.unshift({
+                id: Date.now(),
+                title: title,
+                customer: customer.startsWith('@') ? customer : `@${customer}`,
+                likes: 1,
+                image: url
+            });
+
+            closeUploadModal();
+            renderGallery();
+            showToast('Your dish photo has been added to our guest showcase!');
+            e.target.reset();
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const msg = document.getElementById('toastMsg');
+            msg.textContent = message;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3500);
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
